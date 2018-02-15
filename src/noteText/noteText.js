@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './noteText.css';
 
 
@@ -6,25 +7,47 @@ class NoteText extends Component {
   handleCharCount = (event) => {
     const charCount = event.target.value.length;
     this.props.countUpdater(charCount);
+    this.props.noteValue(event.target.value);
   }
   render() {
     return (
       <div className="NoteText">
         <div>
-          <div className="HelpText">Please type your note below</div>
+          <div className="HelpText">{this.props.helpText}</div>
         </div>
         <div>
           <textarea
             id="note-content"
-            placeholder="Please enter note text"
+            placeholder={this.props.placeHolder}
             className={this.props.getCharsLeft === 0 ? 'NoteTextAreaRed' : 'NoteTextArea'}
             maxLength={this.props.getMaxChars}
             onChange={this.handleCharCount}
+            value={this.props.value}
           />
         </div>
       </div>
     );
   }
 }
+
+NoteText.propTypes = {
+  placeHolder: PropTypes.string,
+  getCharsLeft: PropTypes.number,
+  getMaxChars: PropTypes.number,
+  helpText: PropTypes.string,
+  countUpdater: PropTypes.func,
+  noteValue: PropTypes.func,
+  value: PropTypes.string,
+};
+
+NoteText.defaultProps = {
+  placeHolder: 'Type note here',
+  getCharsLeft: 0,
+  getMaxChars: 0,
+  helpText: 'Enter note below',
+  countUpdater: charCount => charCount,
+  noteValue: text => text,
+  value: '',
+};
 
 export default NoteText;

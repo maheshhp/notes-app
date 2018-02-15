@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './saveOptions.css';
 
 class SaveOptions extends Component {
@@ -6,12 +7,25 @@ class SaveOptions extends Component {
     return (
       <div className="SaveOptions">
         <div>
-          <div className="SaveText">Save</div>
+          <a className="SaveText" href="#save" onClick={this.props.saveNoteFunction}>{this.props.saveTextString}</a>
           <div className="CharCount">{this.props.charCount} characters left</div>
         </div>
       </div>
     );
   }
 }
+
+SaveOptions.propTypes = {
+  saveTextString: PropTypes.string,
+  charCount: PropTypes.number,
+  saveNoteFunction: PropTypes.func,
+};
+
+SaveOptions.defaultProps = {
+  saveTextString: 'Save',
+  charCount: 0,
+  saveNoteFunction: () => null,
+};
+
 
 export default SaveOptions;
