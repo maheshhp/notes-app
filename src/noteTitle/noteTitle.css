@@ -11,7 +11,7 @@
   display: inline-block;
   padding-top: 10px;
 }
-button{
+.LangButton{
   float: right;
   margin-right: 6%;
   height: 40px;

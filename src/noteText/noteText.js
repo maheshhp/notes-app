@@ -36,8 +36,8 @@ NoteText.propTypes = {
   getMaxChars: PropTypes.number,
   helpText: PropTypes.string,
   countUpdater: PropTypes.func,
-  noteValue: PropTypes.func,
   value: PropTypes.string,
+  noteValue: PropTypes.func,
 };
 
 NoteText.defaultProps = {
@@ -46,8 +46,8 @@ NoteText.defaultProps = {
   getMaxChars: 0,
   helpText: 'Enter note below',
   countUpdater: charCount => charCount,
-  noteValue: text => text,
   value: '',
+  noteValue: text => text,
 };
 
 export default NoteText;

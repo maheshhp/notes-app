@@ -12,7 +12,7 @@ class NoteTitle extends Component {
       <div className="NoteTitle">
         <div>
           <div className="TitleText">{this.props.noteTitle}</div>
-          <button>{this.props.buttonText}</button>
+          <button className="LangButton">{this.props.buttonText}</button>
         </div>
         <div>
           <input type="text" id="note-title" placeholder={this.props.placeHolder} onChange={this.updateNoteTitle} value={this.props.value} />

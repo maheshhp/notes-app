@@ -6,7 +6,9 @@ class Footer extends Component {
   render() {
     return (
       <div className="Footer">
-        <a href="#about">{this.props.footerText}</a>
+        <button onClick={this.props.switchDisplay} className="FooterButton" >
+          {this.props.footerText}
+        </button>
       </div>
     );
   }
@@ -14,10 +16,12 @@ class Footer extends Component {
 
 Footer.defaultProps = {
   footerText: 'About Us',
+  switchDisplay: () => {},
 };
 
 Footer.propTypes = {
   footerText: PropTypes.string,
+  switchDisplay: PropTypes.func,
 };
 
 export default Footer;
