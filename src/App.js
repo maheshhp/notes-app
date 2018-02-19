@@ -19,9 +19,43 @@ class App extends Component {
     noteText: '',
     noteKey: 0,
   }
-  handleCharCount = (charCount) => {
-    const charLength = this.state.maxChar - charCount;
-    this.setState({ chars_left: charLength });
+  componentDidMount() {
+    fetch('/notes/all')
+      .then((response) => {
+        if (!response.ok) {
+          console.log('Network request failed');
+        }
+        return response;
+      })
+      .then(res => res.json())
+      .then((jsonRes) => {
+        console.log('Response from API => ', jsonRes);
+        this.setState({
+          noteTitle: '',
+          noteText: '',
+          chars_left: this.state.maxChar,
+          dispStatus: 1,
+          noteKey: jsonRes.notes.length,
+        });
+        this.props.saveNote(jsonRes.notes);
+      }, () => {
+        this.setState({
+          noteTitle: '',
+          noteText: '',
+          chars_left: this.state.maxChar,
+          dispStatus: 1,
+          noteKey: 1,
+        });
+      });
+  }
+  syncNotesWithDB = () => {
+    console.log(this.props.savedNotes);
+    fetch('/notes/update', {
+      method: 'POST',
+      body: JSON.stringify(this.props.savedNotes),
+    }).then((response) => {
+      console.log(response);
+    });
   }
   changeDisplay = (dispKey) => {
     this.setState({ dispStatus: dispKey });
@@ -67,9 +101,10 @@ class App extends Component {
           <NoteTitle
             noteTitle="Note Title"
             placeHolder="Please type your note title"
-            buttonText="en"
+            buttonText="Sync"
             value={this.state.noteTitle}
             titleValue={this.saveTitle}
+            syncFunction={this.syncNotesWithDB}
           />
           <NoteText
             countUpdater={this.handleCharCount}

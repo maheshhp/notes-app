@@ -5,9 +5,6 @@ export const saveAction = noteData => ({
   },
 });
 
-export const editAction = noteData => ({
-  type: 'EDIT',
-  payload: {
-    noteData,
-  },
+export const editAction = () => ({
+  type: 'SYNC',
 });
