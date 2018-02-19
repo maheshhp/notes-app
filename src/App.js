@@ -1,25 +1,30 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Header from './header/Header';
-import Footer from './footer/Footer';
-import NoteTitle from './noteTitle/NoteTitle';
-import NoteText from './noteText/NoteText';
-import SaveOptions from './saveOptions/SaveOptions';
-import NoteCard from './noteCard/NoteCard';
+import { connect } from 'react-redux';
+import { saveAction, editAction } from './redux/actions';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import NoteTitle from './components/noteTitle/NoteTitle';
+import NoteText from './components/noteText/NoteText';
+import SaveOptions from './components/saveOptions/SaveOptions';
+import NoteCard from './components/noteCard/NoteCard';
 import './App.css';
 
 class App extends Component {
   state = {
     chars_left: 10,
     maxChar: 10,
+    dispStatus: 1,
     noteTitle: '',
     noteText: '',
-    savedNotes: [],
-    dispStatus: 1,
     noteKey: 0,
   }
   handleCharCount = (charCount) => {
     const charLength = this.state.maxChar - charCount;
     this.setState({ chars_left: charLength });
+  }
+  changeDisplay = (dispKey) => {
+    this.setState({ dispStatus: dispKey });
   }
   saveText = (text) => {
     this.setState({ noteText: text });
@@ -27,19 +32,16 @@ class App extends Component {
   saveTitle = (title) => {
     this.setState({ noteTitle: title });
   }
-  changeDisplay = (dispKey) => {
-    this.setState({ dispStatus: dispKey });
-  }
   saveNote = () => {
     const currentKey = this.state.noteKey;
-    const newSavedNotes = this.state.savedNotes;
+    const newSavedNotes = this.props.savedNotes;
     newSavedNotes[currentKey] = {
       noteKey: this.state.noteKey,
       noteTitle: this.state.noteTitle,
       noteText: this.state.noteText,
     };
+    this.props.saveNote(newSavedNotes);
     this.setState({
-      savedNotes: newSavedNotes,
       noteTitle: '',
       noteText: '',
       chars_left: this.state.maxChar,
@@ -48,7 +50,7 @@ class App extends Component {
     });
   }
   editNote = (noteKey) => {
-    const noteData = this.state.savedNotes[noteKey];
+    const noteData = this.props.savedNotes[noteKey];
     this.setState({
       noteText: noteData.noteText,
       noteTitle: noteData.noteText,
@@ -66,17 +68,17 @@ class App extends Component {
             noteTitle="Note Title"
             placeHolder="Please type your note title"
             buttonText="en"
-            titleValue={this.saveTitle}
             value={this.state.noteTitle}
+            titleValue={this.saveTitle}
           />
           <NoteText
             countUpdater={this.handleCharCount}
             getCharsLeft={this.state.chars_left}
             getMaxChars={this.state.maxChar}
-            placeHolder="Please enter note here"
-            helpText="Please type your note below"
             value={this.state.noteText}
             noteValue={this.saveText}
+            placeHolder="Please enter note here"
+            helpText="Please type your note below"
           />
           <SaveOptions
             charCount={this.state.chars_left}
@@ -90,7 +92,7 @@ class App extends Component {
         </div>
       );
     }
-    const savedNoteItems = this.state.savedNotes.map(note => (
+    const savedNoteItems = this.props.savedNotes.map(note => (
       <NoteCard
         key={note.noteKey}
         noteId={note.noteKey}
@@ -123,4 +125,23 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  savedNotes: PropTypes.array,
+  saveNote: PropTypes.func,
+};
+
+App.defaultProps = {
+  savedNotes: [],
+  saveNote: () => {},
+};
+
+const mapStateToProps = state => ({
+  savedNotes: state.savedNotes,
+});
+
+const mapDispatchToProps = dispatch => ({
+  saveNote: noteData => dispatch(saveAction(noteData)),
+  editNote: noteData => dispatch(editAction(noteData)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
