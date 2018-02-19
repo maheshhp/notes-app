@@ -2,10 +2,6 @@ const defaultState = {
   savedNotes: [],
 };
 
-const updateDb = (localNotes) => {
-  console.log(localNotes);
-};
-
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case 'SAVE':

@@ -85,7 +85,7 @@ class App extends Component {
     const noteData = this.props.savedNotes[noteKey];
     this.setState({
       noteText: noteData.noteText,
-      noteTitle: noteData.noteText,
+      noteTitle: noteData.noteTitle,
       noteKey: noteData.noteKey,
     }, this.changeDisplay(1));
   }
