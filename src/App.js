@@ -29,7 +29,6 @@ class App extends Component {
       })
       .then(res => res.json())
       .then((jsonRes) => {
-        console.log('Response from API => ', jsonRes);
         this.setState({
           noteTitle: '',
           noteText: '',
@@ -49,7 +48,6 @@ class App extends Component {
       });
   }
   syncNotesWithDB = () => {
-    console.log(this.props.savedNotes);
     fetch('/notes/update', {
       method: 'POST',
       body: JSON.stringify(this.props.savedNotes),
