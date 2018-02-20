@@ -47,6 +47,10 @@ class App extends Component {
         });
       });
   }
+  handleCharCount = (charCount) => {
+    const charLength = this.state.maxChar - charCount;
+    this.setState({ chars_left: charLength });
+  }
   syncNotesWithDB = () => {
     fetch('/notes/update', {
       method: 'POST',
