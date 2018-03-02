@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { saveAction } from './redux/actions';
 import SavedNotes from './components/savedNotes/SavedNotes';
+import EditNote from './components/editNote/EditNote';
 import SelectOption from './components/selectOption/SelectOption';
 import NewNote from './components/newNote/NewNote';
 
@@ -32,6 +33,7 @@ class App extends Component {
           <Route exact path="/" component={SelectOption} />
           <Route path="/new" component={NewNote} />
           <Route path="/saved" component={SavedNotes} />
+          <Route path="/edit/:noteKey" component={EditNote} />
         </Switch>
       </div>);
   }

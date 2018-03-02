@@ -9,14 +9,10 @@ import NoteCard from '../noteCard/NoteCard';
 import './savedNotes.css';
 
 class NewNote extends Component {
-  // editNote = (noteKey) => {
-  //   const noteData = this.props.savedNotes[noteKey];
-  //   this.setState({
-  //     noteText: noteData.noteText,
-  //     noteTitle: noteData.noteTitle,
-  //     noteKey: noteData.noteKey,
-  //   });
-  // }
+  editNote = (noteKey) => {
+    const { history } = this.props;
+    history.push(`/edit/${noteKey}`);
+  }
 
   render() {
     const savedNoteItems = this.props.savedNotes.map(note => (
@@ -46,6 +42,7 @@ class NewNote extends Component {
 
 NewNote.propTypes = {
   savedNotes: PropTypes.array,
+  history: PropTypes.object.isRequired,
 };
 
 NewNote.defaultProps = {
