@@ -12,7 +12,6 @@ class NoteTitle extends Component {
       <div className="NoteTitle">
         <div>
           <div className="TitleText">{this.props.noteTitle}</div>
-          <button className="SyncButton" onClick={this.props.syncFunction}>{this.props.buttonText}</button>
         </div>
         <div>
           <input type="text" id="note-title" placeholder={this.props.placeHolder} onChange={this.updateNoteTitle} value={this.props.value} />
@@ -26,16 +25,13 @@ class NoteTitle extends Component {
 NoteTitle.propTypes = {
   placeHolder: PropTypes.string,
   noteTitle: PropTypes.string,
-  buttonText: PropTypes.string,
   titleValue: PropTypes.func,
   value: PropTypes.string,
-  syncFunction: PropTypes.func.isRequired,
 };
 
 NoteTitle.defaultProps = {
   placeHolder: 'Type note title here',
   noteTitle: 'Enter note title below',
-  buttonText: 'Lang',
   titleValue: text => text,
   value: '',
 };

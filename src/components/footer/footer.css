@@ -2,8 +2,11 @@
   background-color: rgb(247, 247, 247);
   height: 48px;
   text-align: center;
-  padding-top: 6%;
+  padding-top: 4%;
+  padding-bottom: 2%;
 }
-.FooterButton{
-  
+.Footer>a{
+  font-weight: 300;
+  font-size: 1.5rem;
+  text-decoration: none;
 }

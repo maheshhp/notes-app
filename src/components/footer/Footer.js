@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './footer.css';
 
 class Footer extends Component {
   render() {
     return (
       <div className="Footer">
-        <button onClick={this.props.switchDisplay} className="FooterButton" >
-          {this.props.footerText}
-        </button>
+        <Link to={this.props.footerLink}>
+          <p className="FooterButton" >
+            {this.props.footerText}
+          </p>
+        </Link>
       </div>
     );
   }
@@ -16,12 +19,12 @@ class Footer extends Component {
 
 Footer.defaultProps = {
   footerText: 'About Us',
-  switchDisplay: () => {},
+  footerLink: '/',
 };
 
 Footer.propTypes = {
   footerText: PropTypes.string,
-  switchDisplay: PropTypes.func,
+  footerLink: PropTypes.string,
 };
 
 export default Footer;

@@ -12,19 +12,15 @@ class NoteText extends Component {
   render() {
     return (
       <div className="NoteText">
-        <div>
-          <div className="HelpText">{this.props.helpText}</div>
-        </div>
-        <div>
-          <textarea
-            id="note-content"
-            placeholder={this.props.placeHolder}
-            className={this.props.getCharsLeft === 0 ? 'NoteTextAreaRed' : 'NoteTextArea'}
-            maxLength={this.props.getMaxChars}
-            onChange={this.handleCharCount}
-            value={this.props.value}
-          />
-        </div>
+        <div className="HelpText">{this.props.helpText}</div>
+        <textarea
+          id="note-content"
+          placeholder={this.props.placeHolder}
+          className={this.props.getCharsLeft === 0 ? 'NoteTextAreaRed' : 'NoteTextArea'}
+          maxLength={this.props.getMaxChars}
+          onChange={this.handleCharCount}
+          value={this.props.value}
+        />
       </div>
     );
   }

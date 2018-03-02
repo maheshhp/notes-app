@@ -1,0 +1,21 @@
+.SavedNotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: rgb(233, 233, 239);
+}
+.SavedNotesContainer{
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  flex-grow: 1;
+  justify-content: space-around;
+}
+.BackToHomeLink{
+  align-self: center;
+}
+.BackToHomeLink>a{
+  text-decoration: none;
+  font-size: 1.2rem;
+}

@@ -5,7 +5,6 @@ import './noteCard.css';
 
 class NoteCard extends Component {
   startEdit = (event) => {
-    console.log(event.target);
     this.props.editHandler(event.target.id);
   }
   render() {
@@ -15,8 +14,8 @@ class NoteCard extends Component {
         id={this.props.noteId}
         onClick={this.startEdit}
       >
-        <h4>{this.props.noteTitle}</h4>
-        <p>{this.props.noteText}</p>
+        <h4 className="CardNoteTitle">{this.props.noteTitle}</h4>
+        <p className="CardNoteText">{this.props.noteText}</p>
       </div>
     );
   }

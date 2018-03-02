@@ -6,10 +6,8 @@ class SaveOptions extends Component {
   render() {
     return (
       <div className="SaveOptions">
-        <div>
-          <a className="SaveText" href="#save" onClick={this.props.saveNoteFunction}>{this.props.saveTextString}</a>
-          <div className="CharCount">{this.props.charCount} characters left</div>
-        </div>
+        <div className="SaveText"><a onClick={this.props.saveNoteFunction}>{this.props.saveTextString}</a></div>
+        <div className="CharCount"><p className={this.props.charCount === 0 ? 'CharCountRed' : ''}>{this.props.charCount} characters left</p></div>
       </div>
     );
   }
